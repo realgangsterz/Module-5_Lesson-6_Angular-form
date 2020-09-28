@@ -24,7 +24,12 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.registerForm);
+    // update form state
+    this.registerForm.patchValue({
+      email: 'info@example.com'
+    });
   }
+
 }
 //???
 function comparePassword(c: AbstractControl) {
@@ -34,5 +39,7 @@ function comparePassword(c: AbstractControl) {
       passwordnotmatch: true
     };
 }
+
+
 
 
