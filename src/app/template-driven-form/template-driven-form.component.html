@@ -1,12 +1,22 @@
 <!--<p>template-driven-form works!</p>-->
 <h2 class="text-center">User profile form</h2>
-<form #profileForm="ngForm" novalidate (submit)="onSubmit(profileForm)" class="row justify-content-md-center">
+<form #profileForm="ngForm" novalidate (ngSubmit)="onSubmit(profileForm)" class="row justify-content-md-center">
   <div class="col-md">
     <div class="form-group row">
       <label for="example-text-input" class="col-md-2 col-form-label">Name:</label>
       <div class="col-md-10">
-        <input [(ngModel)]="profile.username" name="username" class="form-control" type="text" id="example-text-input">
+        <input [(ngModel)]="profile.username" name="username" #username="ngModel" required minlength="6" class="form-control" type="text" id="example-text-input">
       </div>
+<!--      Hien thi validate du lieu      -->
+     <div *ngIf="!username.valid && username.touched" class="alert alert-danger" role="alert">
+       <p *ngIf="username?.errors?.required">
+         Username is required
+       </p>
+       <p *ngIf="username?.errors?.minlength">
+         The input must be of minimum length 6 characters
+       </p>
+     </div>
+<!--   Hien thi validate du lieu     -->
     </div>
     <div class="form-group row">
       <label for="example-email-input" class="col-md-2 col-form-label">Email:</label>
@@ -14,24 +24,26 @@
         <input [(ngModel)]="profile.email" name="email" class="form-control" type="text" id="example-email-input">
       </div>
     </div>
-    <div class="form-group row">
-      <label for="example-url-fb" class="col-md-2 col-form-label">Facebook:</label>
-      <div class="col-md-10">
-        <input [(ngModel)]="profile.facebook" name="facebook" class="form-control" type="text" id="example-url-fb">
+    <fieldset ngModelGroup="social">
+      <div class="form-group row">
+        <label for="example-url-fb" class="col-md-2 col-form-label">Facebook:</label>
+        <div class="col-md-10">
+          <input [(ngModel)]="profile.facebook" name="facebook" class="form-control" type="text" id="example-url-fb">
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-url-twt" class="col-md-2 col-form-label">Twitter:</label>
-      <div class="col-md-10">
-        <input [(ngModel)]="profile.twitter" name="twitter" class="form-control" type="text" id="example-url-twt">
+      <div class="form-group row">
+        <label for="example-url-twt" class="col-md-2 col-form-label">Twitter:</label>
+        <div class="col-md-10">
+          <input [(ngModel)]="profile.twitter" name="twitter" class="form-control" type="text" id="example-url-twt">
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-url-web" class="col-md-2 col-form-label">Website:</label>
-      <div class="col-md-10">
-        <input [(ngModel)]="profile.website" name="website" class="form-control" type="text" id="example-url-web">
+      <div class="form-group row">
+        <label for="example-url-web" class="col-md-2 col-form-label">Website:</label>
+        <div class="col-md-10">
+          <input [(ngModel)]="profile.website" name="website" class="form-control" type="text" id="example-url-web">
+        </div>
       </div>
-    </div>
+    </fieldset>
     <div class="form-group row">
       <label for="example-tel-input" class="col-md-2 col-form-label">Telephone:</label>
       <div class="col-md-10">

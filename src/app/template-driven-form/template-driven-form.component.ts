@@ -23,5 +23,6 @@ export class TemplateDrivenFormComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onSubmit(profileForm) {
     console.log(profileForm);
+    // throw new Error('Something went wrong');
   }
 }
